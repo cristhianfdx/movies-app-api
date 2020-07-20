@@ -1,6 +1,4 @@
-FROM node:lts-alpine
-
-RUN apk add --update --no-cache postgresql-client postgresql-dev
+FROM node:lts
 
 WORKDIR /app
 

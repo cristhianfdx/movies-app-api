@@ -9,7 +9,7 @@ services:
       - ./:/app
     container_name: app_test
     command: >
-      sh -c "./wait-for.sh postgres_test:5432 &&
+      sh -c "sleep 3 &&
             npx sequelize db:drop &&
             npx sequelize db:create &&
             npx sequelize db:migrate &&
