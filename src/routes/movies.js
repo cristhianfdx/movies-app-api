@@ -14,13 +14,16 @@ import { createFavoriteValidators } from './validators/create-favorite-validator
 
 const router = Router();
 
-router.get('/popular', authenticateToken, getPopular);
-router.get('/:id', authenticateToken, getDetail);
+router
+.get('/popular', authenticateToken, getPopular);
+router.get('/', authenticateToken, getDetail);
 router.get('/now_playing', authenticateToken, getNow);
-router.get('/favorites/:user_id', authenticateToken, getFavorites);
+router.get('/favorites', authenticateToken, getFavorites);
+
 router
   .route('/favorites/:user_id')
   .post(createFavoriteValidators, authenticateToken, createFavorite);
+
 router.delete('/favorites/:user_id', authenticateToken, deleteFavorites);
 
 export default router;

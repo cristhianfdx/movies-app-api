@@ -25,7 +25,7 @@ export async function getPopular(req, res) {
 
 export async function getDetail(req, res) {
   try {
-    const movie = await getMovieDetail(req.params.id);
+    const movie = await getMovieDetail(req.query.id);
     res.status(200).json(movie);
   } catch (error) {
     console.error(error);
@@ -44,7 +44,7 @@ export async function getNow(req, res) {
 }
 
 export async function createFavorite(req, res, next) {
-  const { userId } = req.params.user_id;
+  const userId = req.params.user_id;
   const { name, movieId } = req.body;
   console.log(userId);
 
@@ -67,7 +67,7 @@ export async function createFavorite(req, res, next) {
 }
 
 export async function getFavorites(req, res) {
-  const userId = req.params.user_id;
+  const userId = req.query.user_id;
   try {
     const favorites = await UserMovie.findAll({
       where: { userId },

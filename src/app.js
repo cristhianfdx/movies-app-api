@@ -40,6 +40,11 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+// catch 405 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(405));
+});
+
 // catch 417 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(417));
