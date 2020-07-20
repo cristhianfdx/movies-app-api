@@ -10,7 +10,7 @@
     "babel": "babel ./src --out-dir dist --ignore ./src/migrations",
     "clean": "rimraf ./dist",
     "hbcopy": "ncp ./src/config ./dist/config",
-    "test": ""
+    "test": "jest"
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
@@ -37,6 +37,8 @@
     "@babel/core": "^7.10.5",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
+    "babel-jest": "^26.1.0",
+    "jest": "^26.1.0",
     "nodemon": "^2.0.4"
   }
 }
