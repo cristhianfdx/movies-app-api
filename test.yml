@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./compose/test/Dockerfile
     volumes:
-      - ./:/usr/src/app
+      - ./:/app
     container_name: app_test
     command: >
       sh -c "./wait-for.sh postgres_test:5432 &&
