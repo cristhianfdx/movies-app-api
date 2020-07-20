@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=production node dist/index.js",
-    "build": "cross-env NODE_ENV=production npm run clean && npm run babel && npm run hbcopy",
-    "dev": "cross-env NODE_ENV=development npx nodemon ./src --exec babel-node",
+    "start": "npx cross-env NODE_ENV=production node dist/index.js",
+    "build": "npx cross-env NODE_ENV=production npm run clean && npm run babel && npm run hbcopy",
+    "dev": "npx cross-env NODE_ENV=development npx nodemon ./src --exec babel-node",
     "postinstall": "npm run build",
-    "babel": "babel ./src --out-dir dist --ignore ./src/migrations --ignore ./test",
-    "clean": "rimraf ./dist",
-    "hbcopy": "ncp ./src/config ./dist/config",
-    "test": "jest",
-    "pretest": "cross-env NODE_ENV=test npm run db:reset",
+    "babel": "npx babel ./src --out-dir dist --ignore ./src/migrations --ignore ./test",
+    "clean": "npx rimraf ./dist",
+    "hbcopy": "npx ncp ./src/config ./dist/config",
+    "test": "npx jest",
+    "pretest": "npx cross-env NODE_ENV=test npm run db:reset",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
