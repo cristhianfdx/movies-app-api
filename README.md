@@ -99,4 +99,4 @@ Run command: `docker-compose -f development.yml up --build`
  - Then change the settings, run the command: ``npm start`` 
  
  **Run Unit tests:**
-``docker-compose -f test.yml run --rm app_test sh -c "npm run test"``
+``docker-compose -f test.yml build && docker-compose -f test.yml run --rm app_test sh -c "npm run test"``
