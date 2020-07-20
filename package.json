@@ -1,0 +1,42 @@
+{
+  "name": "movies-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "build": "cross-env NODE_ENV=production npm run clean && npm run babel && npm run hbcopy",
+    "dev": "cross-env NODE_ENV=development npx nodemon ./src --exec babel-node",
+    "postinstall": "npm run build",
+    "babel": "babel ./src --out-dir dist --ignore ./src/migrations",
+    "clean": "rimraf ./dist",
+    "hbcopy": "ncp ./src/config ./dist/config",
+    "test": ""
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.10.4",
+    "axios": "^0.19.2",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-validator": "^6.6.0",
+    "helmet": "^3.23.3",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "~1.9.1",
+    "ncp": "^2.0.0",
+    "pg": "^8.3.0",
+    "rimraf": "^3.0.2",
+    "sequelize": "^6.3.3",
+    "sequelize-cli": "^6.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "nodemon": "^2.0.4"
+  }
+}
