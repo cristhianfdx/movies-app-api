@@ -11,7 +11,7 @@
     "username": "postgres",
     "password": "yymqaPGT9h6z2TNezMtX",
     "database": "movies_test",
-    "host": "127.0.0.1",
+    "host": "postgres",
     "port": 5432,
     "dialect": "postgres"
   },

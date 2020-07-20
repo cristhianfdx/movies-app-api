@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production npm run clean && npm run babel && npm run hbcopy",
     "dev": "cross-env NODE_ENV=development npx nodemon ./src --exec babel-node",
     "postinstall": "npm run build",
-    "babel": "babel ./src --out-dir dist --ignore ./src/migrations --ignore ./src/test",
+    "babel": "babel ./src --out-dir dist --ignore ./src/migrations --ignore ./test",
     "clean": "rimraf ./dist",
     "hbcopy": "ncp ./src/config ./dist/config",
     "test": "jest",
