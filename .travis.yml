@@ -8,4 +8,4 @@ services:
 before_scripts: pip install docker-compose
 
 script:
-    - docker-compose run app sh -c "npm run test"
+    - docker-compose -f test.yml run app sh -c "npm run test"
