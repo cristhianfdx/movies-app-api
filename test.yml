@@ -12,7 +12,7 @@ services:
             npx sequelize db:create &&
             npx sequelize db:migrate &&
             npm run test"
-    env_file: ./compose/testing/.env
+    env_file: ./compose/env
     ports:
       - "3000:3000"
     depends_on:
