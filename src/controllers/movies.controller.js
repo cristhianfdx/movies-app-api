@@ -44,7 +44,9 @@ export async function getNow(req, res) {
 }
 
 export async function createFavorite(req, res, next) {
-  const { name, userId, movieId } = req.body;
+  const { userId } = req.params.user_id;
+  const { name, movieId } = req.body;
+  console.log(userId);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

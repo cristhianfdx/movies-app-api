@@ -18,9 +18,9 @@ router.get('/popular', authenticateToken, getPopular);
 router.get('/:id', authenticateToken, getDetail);
 router.get('/now_playing', authenticateToken, getNow);
 router.get('/favorites/:user_id', authenticateToken, getFavorites);
-router.delete('/favorites/:user_id', authenticateToken, deleteFavorites);
 router
-  .route('/')
+  .route('/favorites/:user_id')
   .post(createFavoriteValidators, authenticateToken, createFavorite);
+router.delete('/favorites/:user_id', authenticateToken, deleteFavorites);
 
 export default router;
