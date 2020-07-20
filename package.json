@@ -7,10 +7,12 @@
     "build": "cross-env NODE_ENV=production npm run clean && npm run babel && npm run hbcopy",
     "dev": "cross-env NODE_ENV=development npx nodemon ./src --exec babel-node",
     "postinstall": "npm run build",
-    "babel": "babel ./src --out-dir dist --ignore ./src/migrations",
+    "babel": "babel ./src --out-dir dist --ignore ./src/migrations --ignore ./src/test",
     "clean": "rimraf ./dist",
     "hbcopy": "ncp ./src/config ./dist/config",
-    "test": "jest"
+    "test": "jest",
+    "pretest": "cross-env NODE_ENV=test npm run db:reset",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
@@ -39,6 +41,9 @@
     "@babel/preset-env": "^7.10.4",
     "babel-jest": "^26.1.0",
     "jest": "^26.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "sequelize-mock": "^0.10.2",
+    "superagent": "^5.3.1",
+    "supertest": "^4.0.2"
   }
 }
