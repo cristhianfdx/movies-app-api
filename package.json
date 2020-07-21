@@ -11,7 +11,7 @@
     "babel": "babel ./src --out-dir dist --ignore ./src/migrations --ignore ./test",
     "clean": "rimraf ./dist",
     "hbcopy": "ncp ./src/config ./dist/config",
-    "test": "jest",
+    "test": "nyc --reporter=html --reporter=text mocha mocha 'test/**/*.js' --require @babel/register --reporter spec",
     "pretest": "cross-env NODE_ENV=test npm run db:reset",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
@@ -40,11 +40,11 @@
     "@babel/core": "^7.10.5",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
-    "babel-jest": "^26.1.0",
-    "jest": "^26.1.0",
+    "@babel/register": "^7.10.5",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.0.1",
     "nodemon": "^2.0.4",
-    "sequelize-mock": "^0.10.2",
-    "superagent": "^5.3.1",
-    "supertest": "^4.0.2"
+    "nyc": "^15.1.0"
   }
 }
