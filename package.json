@@ -11,7 +11,7 @@
     "babel": "babel ./src --out-dir dist --ignore ./src/migrations --ignore ./test",
     "clean": "rimraf ./dist",
     "hbcopy": "ncp ./src/config ./dist/config",
-    "test": "nyc --reporter=html --reporter=text mocha mocha 'test/**/*.js' --require @babel/register --reporter spec",
+    "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js' --require @babel/register --reporter spec",
     "pretest": "cross-env NODE_ENV=test npm run db:reset",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
