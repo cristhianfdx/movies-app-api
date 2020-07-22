@@ -7,5 +7,7 @@ services:
 
 before_scripts: pip install docker-compose
 
+after_success: npm run coverage
+
 script:
   - docker-compose -f test.yml run app_test sh -c "npm run test"
