@@ -1,24 +1,37 @@
-// import request from 'supertest';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import chaiPromised from 'chai-as-promised';
 
-// import app from '../../src/app';
+import app from '../../src/app';
 
-// const URL = '/api/users';
+chai.use(chaiHttp);
+chai.use(chaiPromised);
 
-// const newUser = {
-//   name: 'testName',
-//   username: 'user1',
-//   email: 'mail@mail.com',
-//   password: '123456',
-// };
+const URL = '/api/users';
 
-// describe('Test the user routes', () => {
-//   test('It should create a new user', async () => {
-//     const response = await request(app).post(URL).send(newUser);
-//     expect(response.status).toBe(201);
-//   });
+describe('Test the user routes', () => {
+  it('It should create a new user', () => {
+    chai
+      .request(app)
+      .post(URL)
+      .send({
+        name: 'test',
+        email: 'mail@mail.com',
+        password: '1234567',
+        username: 'username',
+      })
+      .then((res) => {
+        chai.expect(res).to.be.status(201);
+      });
+  });
 
-//   test('It should throw an error code if the request is invalid', async () => {
-//     const response = await request(app).post(URL).send({});
-//     expect(response.status).toBe(417);
-//   });
-// });
+  it('It should throw an error code if the request is invalid', () => {
+    chai
+      .request(app)
+      .post(URL)
+      .send({})
+      .then((res) => {
+        chai.expect(res).to.be.status(417);
+      });
+  });
+});
