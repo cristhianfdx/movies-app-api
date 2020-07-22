@@ -10,28 +10,24 @@ services:
     container_name: app_test
     restart: unless-stopped
     command: >
-      sh -c "sleep 3 &&
-            npx sequelize db:drop &&
-            npx sequelize db:create &&
-            npx sequelize db:migrate &&
-            npm run test"
+      sh -c "npm run test"
     env_file: ./compose/test/env
     ports:
       - "3000:3000"
-    depends_on:
-      - postgres_test
+    # depends_on:
+    #   - postgres_test
 
-  postgres_test:
-    image: postgres
-    volumes:
-      - pg_test:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=123456789
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=movies_test
-    container_name: postgres_test
+  # postgres_test:
+  #   image: postgres
+  #   volumes:
+  #     - pg_test:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     - POSTGRES_PASSWORD=123456789
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_DB=movies_test
+  #   container_name: postgres_test
 
-volumes:
-  pg_test: {}
+# volumes:
+#   pg_test: {}

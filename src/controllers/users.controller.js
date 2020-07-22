@@ -1,56 +1,32 @@
-import { Op } from 'sequelize';
 import { validationResult } from 'express-validator';
-import * as bcrypt from 'bcrypt';
 
-import models from '../models/index';
-
-const User = models.User;
-
-export async function create(req, res, next) {
-  const { name, username, email, password } = req.body;
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const errorMessages = errors.array().map((value) => value.msg);
-    return res.status(417).json({ errors: errorMessages });
+class UsersController {
+  constructor(userService) {
+    this.userService = userService;
   }
 
-  const existingUser = await validateExistingUser(username, email);
-  if (existingUser.length > 0) {
-    return res.status(417).json('Username or email already exists!');
-  }
+  async create(req, res) {
+    const { name, username, email, password } = req.body;
 
-  const encryptedPassword = await getEncryptedPassword(password);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorMessages = errors.array().map((value) => value.msg);
+      return res.status(417).json({ errors: errorMessages });
+    }
 
-  try {
-    await User.create({
-      name,
-      username,
-      email,
-      password: encryptedPassword,
-    });
+    const existingUser = await this.validateIfUserExists(username, email);
+    if (existingUser) {
+      return res.status(417).json('Username or email already exists!');
+    }
 
-    return res.sendStatus(201);
-  } catch (error) {
-    console.error(error);
-    return res.sendStatus(500);
+    try {
+      await this.userService.create({ name, username, email, password });
+      return res.status(201).json();
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json();
+    }
   }
 }
 
-async function validateExistingUser(username = '', email = '') {
-  return await User.findAll({
-    where: {
-      [Op.or]: [{ username }, { email }],
-    },
-  });
-}
-
-async function getEncryptedPassword(password) {
-  const saltRounds = 10;
-  return await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-      if (err) reject(err);
-      resolve(hash);
-    });
-  });
-}
+export default UsersController;

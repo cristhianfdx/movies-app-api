@@ -1,13 +1,6 @@
-language: python
-python:
-  - "3.6"
+language: node_js
+node_js:
+    - "node" 
 
-services:
-  - docker
-
-before_scripts: pip install docker-compose
-
-after_success: npm run coverage
-
-script:
-  - docker-compose -f test.yml run app_test sh -c "npm run test"
+cache:
+  npm: false
