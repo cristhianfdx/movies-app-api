@@ -14,7 +14,10 @@ class UsersController {
       return res.status(417).json({ errors: errorMessages });
     }
 
-    const existingUser = await this.validateIfUserExists(username, email);
+    const existingUser = await this.userService.validateIfUserExists(
+      username,
+      email
+    );
     if (existingUser) {
       return res.status(417).json('Username or email already exists!');
     }

@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 import models from '../models/index';
 
@@ -19,7 +19,7 @@ class UserRepository {
     });
   }
 
-  async getByUsernameOrEmail(username = '', email = '') {
+  async getByUsernameOrEmail(username, email) {
     return await this.user.findAll({
       where: {
         [Op.or]: [{ username }, { email }],

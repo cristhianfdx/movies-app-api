@@ -7,13 +7,13 @@ class UserService {
     return await this.userRepository.create(user);
   }
 
-  async validateIfUserExists(username = '', email = '') {
+  async validateIfUserExists(username, email) {
     const user = await this.userRepository.getByUsernameOrEmail(
       username,
       email
     );
 
-    return user.shift();
+    return user.length > 0;
   }
 }
 
