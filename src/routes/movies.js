@@ -1,6 +1,5 @@
 import { Router } from 'express';
 
-import { authenticateToken } from '../middlewares/jwt_middleware';
 import {
   getPopular,
   getDetail,
@@ -11,19 +10,19 @@ import {
 } from '../controllers/movies.controller';
 
 import { createFavoriteValidators } from './validators/create-favorite-validator';
+import { authenticate } from '../middlewares/authenticate';
 
 const router = Router();
 
-router
-.get('/popular', authenticateToken, getPopular);
-router.get('/', authenticateToken, getDetail);
-router.get('/now_playing', authenticateToken, getNow);
-router.get('/favorites', authenticateToken, getFavorites);
+router.get('/popular', authenticate, getPopular);
+router.get('/', authenticate, getDetail);
+router.get('/now_playing', authenticate, getNow);
+router.get('/favorites', authenticate, getFavorites);
 
 router
   .route('/favorites/:user_id')
-  .post(createFavoriteValidators, authenticateToken, createFavorite);
+  .post(createFavoriteValidators, authenticate, createFavorite);
 
-router.delete('/favorites/:user_id', authenticateToken, deleteFavorites);
+router.delete('/favorites/:user_id', authenticate, deleteFavorites);
 
 export default router;

@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
-import bcrypt from 'bcrypt';
 
 import models from '../models/index';
+import { encryptPassword } from '../handlers/password-handler';
 
 class UserRepository {
   constructor() {
@@ -9,14 +9,8 @@ class UserRepository {
   }
 
   async create(user) {
-    const { name, username, email, password } = user;
-    const encryptedPassword = await this.getEncryptedPassword(password);
-    return await this.user.create({
-      name,
-      username,
-      email,
-      password: encryptedPassword,
-    });
+    user.password = await encryptPassword(user.password);
+    return await this.user.create(user);
   }
 
   async getByUsernameOrEmail(username, email) {
@@ -25,11 +19,6 @@ class UserRepository {
         [Op.or]: [{ username }, { email }],
       },
     });
-  }
-
-  async getEncryptedPassword(password) {
-    const saltRounds = 10;
-    return await bcrypt.hash(password, saltRounds);
   }
 }
 

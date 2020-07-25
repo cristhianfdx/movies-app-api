@@ -1,3 +1,5 @@
+import '@babel/polyfill';
+
 import { config } from 'dotenv';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -9,8 +11,9 @@ import Express, { json, urlencoded } from 'express';
 import logger from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
+import passport from 'passport';
 
-import '@babel/polyfill';
+import jwtMiddleware from './middlewares/jwt_middleware';
 
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
@@ -28,6 +31,8 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(helmet());
 app.use(cors());
+app.use(passport.initialize());
+passport.use(jwtMiddleware);
 
 // Routes
 app.use('/', indexRouter);

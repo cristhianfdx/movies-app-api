@@ -1,16 +1,19 @@
-import * as jwt from 'jsonwebtoken';
+import { Strategy, ExtractJwt } from 'passport-jwt';
+import models from '../models';
 
-export function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  if (!authHeader) return res.sendStatus(403);
+const options = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
+};
 
-  const token = authHeader.split(' ')[1];
-  if (!token) return res.sendStatus(403);
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    console.error(err);
-    if (err) return res.status(401).json('Invalid credentials.');
-    req.user = user;
-    next();
-  });
-}
+export default new Strategy(options, async (payload, done) => {
+  try {
+    const user = models.User.findByPk(payload.id);
+    if (user) {
+      return done(null, user);
+    }
+    return done(null, false);
+  } catch (error) {
+    console.error(error);
+  }
+});
