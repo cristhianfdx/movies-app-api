@@ -8,8 +8,8 @@ The user can add the movies he wants to a favorites list.
 - Install [Docker](https://docs.docker.com/engine/install/).
 - Install [docker compose](https://docs.docker.com/compose/install/).
 - Sign up to [The Movie DB](https://www.themoviedb.org/) and generate an API Key.
-- Create the `.env` file in the main folder of this project:
-  - Put two environment variables in the file.
+- Change `.env` file:
+  - Set the environment variables in the file.
     - `JWT_SECRET=<your-private-key>`
     - `API_KEY=<your TMDB api_key>`
 
