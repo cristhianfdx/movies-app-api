@@ -79,26 +79,9 @@ The user can add the movies he wants to a favorites list.
 ## Run App
 
 **Development mode in docker container:**
-Run command: `docker-compose -f development.yml up --build`
-
-**Local production mode:**
-- Run command: ``docker-compose -f simple.yml up --build``
-- Change in ``src/config/config.json`` the production configuration:
-
-  Add the following configuration:
-
-```
-"production": {
-    "username": "postgres",
-    "password": "yymqaPGT9h6z2TNezMtX",
-    "database": "movies_prod",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-  }
-```
- - Then change the settings, run the command: ``npm start``
+Run command: `docker-compose up --build`
 
  **Run Unit tests:**
 
-``docker-compose -f test.yml build && docker-compose -f test.yml run --rm app_test sh -c "npm run test"``
-or Execute Linux script : ``./run_test.sh``
+`docker-compose build && docker-compose run --rm app sh -c "npm run test"`
+or Execute Linux script : `./run_test.sh`
