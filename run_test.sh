@@ -1,1 +1,1 @@
-docker-compose -f test.yml build && docker-compose -f test.yml run --rm app_test sh -c "npm run test"
+docker-compose build && docker-compose run --rm app sh -c "npm run test"

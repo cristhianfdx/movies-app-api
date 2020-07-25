@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "yymqaPGT9h6z2TNezMtX",
     "database": "movies_dev",
-    "host": "postgres_dev",
+    "host": "postgres",
     "port": 5432,
     "dialect": "postgres"
   },
@@ -11,7 +11,7 @@
     "username": "postgres",
     "password": "123456789",
     "database": "movies_test",
-    "host": "postgres_test",
+    "host": "postgres",
     "port": 5432,
     "dialect": "postgres"
   },

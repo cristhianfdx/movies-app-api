@@ -1,10 +1,10 @@
 version: "3"
 
 services:
-  app_dev:
+  app:
     build:
       context: .
-      dockerfile: ./compose/development/Dockerfile
+      dockerfile: ./compose/Dockerfile
     volumes:
       - ./:/app
     container_name: app_dev
@@ -19,18 +19,18 @@ services:
             npx sequelize-cli db:migrate &&
             npm run dev"
     depends_on:
-      - postgres_dev
+      - postgres
 
-  postgres_dev:
+  postgres:
     image: postgres:10-alpine
     volumes:
-      - pg_dev:/var/lib/postgresql/data
+      - pg:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=yymqaPGT9h6z2TNezMtX
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=movies_dev
+      - POSTGRES_DB=movies
 
 volumes:
-  pg_dev: {}
+  pg: {}
